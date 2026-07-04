@@ -121,7 +121,7 @@ if not st.session_state.messages:
         """
         <div style='text-align: center; margin-top: 25vh;'>
             <h1 style='color: #2B58F9; font-size: 42px; font-weight: 700; font-family: sans-serif; letter-spacing: -1px; margin-bottom: 5px;'>deepseek</h1>
-            <p style='color: #8B949E; font-size: 18px; font-weight: 400;'>我是全新的 DeepSeek 满血版推理模型，很高兴为您服务，岭南居士。</p>
+            <p style='color: #8B949E; font-size: 18px; font-weight: 400;'>我是全新的 DeepSeek 满血版推理模型，很高兴为您服务，ColinGe。</p>
         </div>
         """, 
         unsafe_allow_html=True
