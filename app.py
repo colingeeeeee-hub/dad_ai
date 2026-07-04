@@ -24,12 +24,12 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
     max-width: 48rem !important; /* ChatGPT 标志性的对话流宽度 (768px) */
 }
 
-/* 2. 彻底关闭侧边栏（如果有多余阴影，直接抹除） */
+/* 2. 彻底关闭侧边栏 */
 [data-testid="stSidebar"] { display: none !important; }
 
 /* 3. 彻底重写对话气泡：去掉方框感，改用 ChatGPT 无框横条流式布局 */
 [data-testid="stChatMessage"] {
-    background-color: transparent !important; /* 拒绝大方块！全部透明 */
+    background-color: transparent !important; /* 全部透明 */
     border: none !important;
     box-shadow: none !important;
     padding: 1.5rem 0rem !important;
@@ -60,7 +60,7 @@ div[data-testid="stChatInput"] {
     padding: 6px 12px !important;
 }
 
-/* 移除输入框聚焦时的难看亮蓝边框 */
+/* 移除输入框聚焦时的边框 */
 div[data-testid="stChatInput"]:focus-within {
     border-color: #565656 !important;
 }
@@ -85,30 +85,29 @@ textarea {
 # 🚀 2. 核心页面控制与样式注入
 # ==============================================================================
 st.set_page_config(
-    page_title="ChatGPT", 
+    page_title="岭南居士的专属人工智能", 
     page_icon="🤖", 
     layout="centered",
-    initial_sidebar_state="collapsed" # 默认隐藏侧边栏
+    initial_sidebar_state="collapsed"
 )
 
 # 强制注入终极美化 CSS
 st.markdown(PERFECT_CHATGPT_CSS, unsafe_allow_html=True)
 
 # 填入你的硅基流动 API Key
-SILICONFLOW_API_KEY = "sk-xxxxxxxx" # 👈 请把这里换成你的真实 Key
+SILICONFLOW_API_KEY = "sk-xxxxxxxx" # 👈 请记得把这里换成你的真实 Key
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # ==============================================================================
-# 💬 3. 对话主战场（无密码，直接进入）
+# 💬 3. 对话主战场
 # ==============================================================================
 
-# 如果还没有聊天记录，显示 ChatGPT 经典的居中欢迎语
+# 如果还没有聊天记录，显示 ChatGPT 经典的居中欢迎语（已更新为居士定制版）
 if not st.session_state.messages:
-    st.markdown("<h2 style='text-align: center; font-weight: 600; margin-top: 30vh; color: #FFF;'>有什么我可以帮您的？</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; font-weight: 600; margin-top: 30vh; color: #FFF;'>有什么我可以帮您的，岭南居士？</h2>", unsafe_allow_html=True)
 else:
-    # 已开始对话：上方完全留空，营造极简空气感
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 # 渲染历史记录
@@ -117,7 +116,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # 捕获输入
-if prompt := st.chat_input("给“老爸的专属AI”发送消息..."):
+if prompt := st.chat_input("给“岭南居士的专属人工智能”发送消息..."):
     with st.chat_message("user"):
         st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -135,7 +134,8 @@ if prompt := st.chat_input("给“老爸的专属AI”发送消息..."):
             response_stream = client.chat.completions.create(
                 model="deepseek-ai/DeepSeek-V3", 
                 messages=[
-                    {"role": "system", "content": "你是由Coling专门为他父亲定制开发的专属AI助手。在对话中，你的语气要格外温柔、沉稳、极具耐心、关怀备至。用词要简练接地气，多用暖心的话，绝不能有机器人的冰冷感。像老朋友一样陪这位父亲聊天、解答各种生活小常识、天气、养生、新闻或者讲温暖的故事，让他感受到陪伴和快乐。"},
+                    # 🤖 核心口吻重构：模仿 ChatGPT 的通用、专业、理性的智能助手口吻，并针对“岭南居士”保持礼貌尊称
+                    {"role": "system", "content": "你是由高级语言模型训练而来的专属人工智能助手。在接下来的对话中，你的服务对象是‘岭南居士’。请保持类似 ChatGPT 的专业、中立、客观且逻辑清晰的谈话风格。你的语气应当彬彬有礼、沉稳博学，并具备优秀的耐心。请根据用户的输入提供准确的解答、信息检索、文学探讨或日常交流，确保回答高效且具有深度，严禁出现任何家庭或私人关系的代入感。"},
                     *st.session_state.messages
                 ],
                 stream=True
@@ -151,7 +151,7 @@ if prompt := st.chat_input("给“老爸的专属AI”发送消息..."):
             
         except Exception as e:
             st.error("⚠️ 网络连接似乎断开了。")
-            full_response = "网络遇到了一点小故障，老爸。请把您刚才的话再说一遍好吗？"
+            full_response = "抱歉，当前网络连接出现异常，未能成功获取响应。请尝试重新发送您的消息。"
             message_placeholder.markdown(full_response)
             
     st.session_state.messages.append({"role": "assistant", "content": full_response})
