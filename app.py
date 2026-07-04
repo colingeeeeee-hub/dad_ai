@@ -326,5 +326,3 @@ else:
         # 存入对话历史
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 ```eof
-
-### 🛠️ 极速升级指引：一分钟换装！
