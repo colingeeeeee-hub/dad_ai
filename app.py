@@ -325,4 +325,3 @@ else:
                 
         # 存入对话历史
         st.session_state.messages.append({"role": "assistant", "content": full_response})
-```eof
