@@ -119,7 +119,7 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 # 初始化 API Key (这里配置成你申请的免费额度硅基流动的 key)
 # *安全起见：你也可以在这里直接用 st.secrets 或是直接填入 Key*
-SILICONFLOW_API_KEY = "import streamlit as st
+SILICONFLOW_API_KEY = "sk-cubkmoblzsywgnblrjiluspbcoedqxhqdxurdiqfimoblifh"
 from openai import OpenAI
 
 # ==============================================================================
@@ -260,7 +260,7 @@ with st.sidebar:
     st.markdown("<p style='font-size: 14px; color: #7A6F62; text-align: center;'>Coling 亲手设计部署<br>© 2026 温暖相伴</p>", unsafe_allow_html=True)
 
 # 定义你们父子间的专属小秘密暗号，比如 "老爸第一" 或者 "0808"
-CORRECT_PASSWORD = "老爸第一" # 替换成您的专属暗号
+CORRECT_PASSWORD = "岭南居士" # 替换成您的专属暗号
 
 if password != CORRECT_PASSWORD:
     # 密码未通过时，展示极简的温暖引导卡片
